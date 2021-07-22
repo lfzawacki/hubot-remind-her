@@ -44,7 +44,7 @@ class Reminders
   constructor: (@robot) ->
     @pending = {}
     @robot.brain.data.reminder_at ?= {}
-    @robot.brain.on 'loaded', =>
+    @robot.brain.once 'loaded', =>
         reminder_at = @robot.brain.data.reminder_at
         for own id, o of reminder_at
           reminder = new ReminderAt o.envelope, new Date(o.date), o.action
