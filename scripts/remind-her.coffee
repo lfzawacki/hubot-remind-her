@@ -71,7 +71,8 @@ class Reminders
 
   fire: (reminder, id) ->
     unless reminder.is_deleted
-      @robot.reply reminder.envelope, "You asked me to remind you #{reminder.action}"
+      # User will be reminded in the channel or conversation where the reminder was queued
+      @robot.send {room: reminder.envelope.room}, "You asked me to remind you #{reminder.action}"
       @pending[reminder.key()].shift()
       @remove(id)
       setTimeout =>
